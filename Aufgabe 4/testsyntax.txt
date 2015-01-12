@@ -1,0 +1,29 @@
+void notAllowedOperationTest::open_notMotor_min___openDoors(){
+	//Zustand herstellen
+	e=new Elevator();
+	//Zustand prüfen
+	ASSERT(e.isOpen());
+	ASSERT(!e.isMotor());
+	ASSERT_EQUAL(0,e.getFloor());
+	//Ungültiges Ereignis
+	ASSERT_THROWS(e.openDoors(),DoorsOpenException);
+	//Zustand sollte unveränder geblieben sein
+	ASSERT(e.isOpen());
+	ASSERT(!e.isMotor());
+	ASSERT_EQUAL(0,e.getFloor());
+}
+
+void allowedOperationTest::open_notMotor_min___closeDoors(){
+	//Zustand herstellen
+	e=new Elevator();
+	//Zustand prüfen
+	ASSERT(e.isOpen());
+	ASSERT(!e.isMotor());
+	ASSERT_EQUAL(0,e.getFloor());
+	//Gültiges Ereignis
+	e.closeDoors();
+	//Zustand sollte jetzt anders sein
+	ASSERT(!e.isOpen());
+	ASSERT(!e.isMotor());
+	ASSERT_EQUAL(0,e.getFloor());
+}
